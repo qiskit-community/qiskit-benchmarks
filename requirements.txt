@@ -1,3 +1,4 @@
+numpy==1.16.1
 git+https://github.com/qiskit/qiskit-terra.git@master
 ddt
 pyyaml
