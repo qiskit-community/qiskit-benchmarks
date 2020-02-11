@@ -1,3 +1,0 @@
-qiskit-terra
-pysub
-git+https://github.com/delapuente/quoll.git@master

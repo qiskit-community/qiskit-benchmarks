@@ -1,2 +1,4 @@
+git+https://github.com/qiskit/qiskit-terra.git@master
+ddt
 pyyaml
 importlib_metadata
