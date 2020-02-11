@@ -1,8 +1,11 @@
 - qiskit-terra:
   - qiskit.transpiler.preset_passmanagers.level0:level_0_pass_manager
   - qiskit.transpiler.preset_passmanagers.level1:level_1_pass_manager
+  - qiskit.transpiler.preset_passmanagers.level2:level_2_pass_manager
+  - qiskit.transpiler.preset_passmanagers.level3:level_3_pass_manager
 
 - git+https://github.com/1ucian0/swap-mapper-trials.git@master:
   - hackqiskit:level1
   - hackqiskit:level2
   - hackqiskit:level3
+  
