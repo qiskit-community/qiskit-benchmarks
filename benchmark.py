@@ -35,13 +35,20 @@ class ResultEncoder(JSONEncoder):
         return JSONEncoder.default(self, obj)
 
 
+results = {}
+
 @ddt
 class TestLevelZero(unittest.TestCase):
     results = []
 
+    def __init__(self, test_name, passmanager_factory):
+        super().__init__(test_name)
+        self.passmanager_factory = passmanager_factory
+
     @classmethod
     def tearDownClass(cls):
-        print(dumps(cls.results, indent=4, cls=ResultEncoder))
+        global results
+        results = cls.results
 
     @classmethod
     def save_result(cls, test_name, **kwargs):
@@ -50,7 +57,7 @@ class TestLevelZero(unittest.TestCase):
     @combine(circuit=[circuit1, circuit2], pm_config=[pm_config1, pm_config2])
     def test_depth(self, circuit, pm_config):
         ""
-        depth = level_0_pass_manager(pm_config).run(circuit).depth()
+        depth = self.passmanager_factory(pm_config).run(circuit).depth()
         TestLevelZero.save_result('depth', circuit=circuit, config=pm_config, result=depth)
 
     @combine(circuit=[circuit1, circuit2], pm_config=[pm_config1, pm_config2])
@@ -63,9 +70,22 @@ class TestLevelZero(unittest.TestCase):
                         'time': time}
             calls.append(out_dict)
 
-        level_0_pass_manager(pm_config).run(circuit, callback=callback)
+        self.passmanager_factory(pm_config).run(circuit, callback=callback)
         TestLevelZero.save_result('time', circuit=circuit, config=pm_config, result=calls)
 
 
-if __name__ == '__main__':
-    result = unittest.main(verbosity=1)
+def test(factory_function):
+    test_loader = unittest.TestLoader()
+    test_names = test_loader.getTestCaseNames(TestLevelZero)
+
+    suite = unittest.TestSuite()
+    for test_name in test_names:
+        suite.addTest(TestLevelZero(test_name, factory_function))
+
+    test_result = unittest.TextTestRunner().run(suite)
+    if not test_result.wasSuccessful():
+        print(f'Tell someone that {one_entry_point} failed')
+        return
+
+    global results
+    return results

@@ -2,6 +2,7 @@ import sys
 import site
 import os.path
 import importlib
+from pprint import pprint
 from itertools import chain
 from dataclasses import dataclass, asdict
 
@@ -9,6 +10,8 @@ import yaml
 import pkg_resources
 import importlib_metadata
 from importlib_metadata import distribution, files
+
+import benchmark
 
 
 def test_entry_points(contributions_path):
@@ -32,7 +35,7 @@ def test_entry_points(contributions_path):
     except AttributeError:
       notify_cannot_find_entry_point(metadata.author_email, one_entry_point)
 
-  print(results)
+  pprint(results)
 
 def get_metadata(module):
   module_path = module.__file__
@@ -65,7 +68,7 @@ def get_dist_files(dist):
     yield path
 
 def test(function):
-  print('run function(passmanager_config)')
+  return benchmark.test(function)
 
 def notify_cannot_find_entry_point(email, entry_point):
   print(f'send "{entry_point} not working" @ {email}')

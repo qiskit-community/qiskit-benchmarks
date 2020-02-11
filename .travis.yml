@@ -6,8 +6,8 @@ install:
   - pip install -r requirements.txt
 
 before_script:
-  - python scripts/generate_contributions_req.py contributions.yaml contributions.txt
+  - python generate_contributions_req.py contributions.yaml contributions.txt
   - pip install -r contributions.txt
 
 script:
-  - python scripts/test_entry_points.py contributions.yaml
+  - python test_entry_points.py contributions.yaml
