@@ -14,19 +14,23 @@
 
 import unittest
 from ddt import ddt
-
+from collections import defaultdict
 from cases import circuit1, circuit2, pm_config1, pm_config2
 from test import combine
-
+from functools import reduce
 results = {}
 
 @ddt
 class TestLevelZero(unittest.TestCase):
-    results = []
+    results = defaultdict(dict)
 
     def __init__(self, test_name, passmanager_factory):
         super().__init__(test_name)
         self.passmanager_factory = passmanager_factory
+
+    @classmethod
+    def setUpClass(cls):
+        cls.results = defaultdict(dict)
 
     @classmethod
     def tearDownClass(cls):
@@ -35,7 +39,7 @@ class TestLevelZero(unittest.TestCase):
 
     @classmethod
     def save_result(cls, test_name, circuit, config, result):
-        cls.results[f'{circuit.name}:{config.name}'] = result
+        cls.results[f'{circuit.name}:{config.name}'][test_name] = result
 
     # @combine(circuit=[circuit1, circuit2], pm_config=[pm_config1, pm_config2])
     @combine(circuit=[circuit1], pm_config=[pm_config1])
@@ -51,12 +55,11 @@ class TestLevelZero(unittest.TestCase):
         calls = []
 
         def callback(pass_, time, **_):
-            out_dict = {'pass': str(pass_.__class__.__name__),
-                        'time': time}
-            calls.append(out_dict)
+            calls.append(time)
 
         self.passmanager_factory(pm_config).run(circuit, callback=callback)
-        TestLevelZero.save_result('time', circuit=circuit, config=pm_config, result=calls)
+        total = reduce(lambda a, b: a + b, calls)
+        TestLevelZero.save_result('time', circuit=circuit, config=pm_config, result=total)
 
 
 def test(factory_function):
@@ -69,7 +72,7 @@ def test(factory_function):
 
     test_result = unittest.TextTestRunner().run(suite)
     if not test_result.wasSuccessful():
-        print(f'Tell someone that {one_entry_point} failed')
+        print(f'Tell someone that {factory_function} failed')
         return
 
     global results
