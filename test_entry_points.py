@@ -63,7 +63,7 @@ def get_metadata(module):
           name=meta['Name'],
           author=meta['Author'],
           author_email=meta['Author-email'],
-          description=meta['Description']
+          description=meta['Summary']
         )
 
 @dataclass
@@ -90,4 +90,5 @@ def notify_cannot_find_entry_point(email, entry_point):
   print(f'send "{entry_point} not working" @ {email}')
 
 if __name__ == '__main__':
-  test_entry_points(sys.argv[1], sys.argv[2])
+  #test_entry_points(sys.argv[1], sys.argv[2])
+  test_entry_points('contributions.yaml', 'www/data.json')
