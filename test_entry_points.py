@@ -2,6 +2,7 @@ import sys
 import site
 import os.path
 import importlib
+from datetime import datetime
 from pprint import pprint
 from itertools import chain
 from dataclasses import dataclass, asdict
@@ -63,7 +64,8 @@ def get_metadata(module):
           name=meta['Name'],
           author=meta['Author'],
           author_email=meta['Author-email'],
-          description=meta['Summary']
+          description=meta['Summary'],
+          timestamp=str(datetime.now())
         )
 
 @dataclass
@@ -76,6 +78,8 @@ class metadata:
   author: str
 
   author_email: str
+
+  timestamp: str
 
 
 def get_dist_files(dist):
