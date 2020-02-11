@@ -24,3 +24,6 @@ coupling2 = [[1, 0], [1, 2], [2, 3], [4, 3]]
 
 pm_config1 = PassManagerConfig(seed_transpiler=42, basis_gates=['u1', 'u2', 'u3', 'cx', 'id'], coupling_map=CouplingMap(coupling1))
 pm_config2 = PassManagerConfig(seed_transpiler=42, basis_gates=['u1', 'u2', 'u3', 'cx', 'id'], coupling_map=CouplingMap(coupling2))
+
+pm_config1.name = 'pm_config1'
+pm_config2.name = 'pm_config2'
