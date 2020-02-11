@@ -49,7 +49,7 @@ class TestLevelZero(unittest.TestCase):
         calls = []
 
         def callback(pass_, time, **_):
-            out_dict = {'pass': str(pass_.__class__),
+            out_dict = {'pass': str(pass_.__class__.__name__),
                         'time': time}
             calls.append(out_dict)
 

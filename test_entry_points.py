@@ -28,6 +28,7 @@ class ResultEncoder(JSONEncoder):
       return obj.get_edges()
     return JSONEncoder.default(self, obj)
 
+
 def test_entry_points(contributions_path, results_path):
   results = {}
 
