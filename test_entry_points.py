@@ -94,5 +94,4 @@ def notify_cannot_find_entry_point(email, entry_point):
   print(f'send "{entry_point} not working" @ {email}')
 
 if __name__ == '__main__':
-  #test_entry_points(sys.argv[1], sys.argv[2])
-  test_entry_points('contributions.yaml', 'www/data.json')
+  test_entry_points(sys.argv[1], sys.argv[2])
