@@ -69,7 +69,7 @@ def test(factory_function):
 
     test_result = unittest.TextTestRunner().run(suite)
     if not test_result.wasSuccessful():
-        print(f'Tell someone that {one_entry_point} failed')
+        print(f'Tell someone that {factory_function} failed')
         return
 
     global results
