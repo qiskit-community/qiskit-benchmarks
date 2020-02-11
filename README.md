@@ -12,4 +12,4 @@ Fork this repository and create a PR with an entry in [`contributions.yaml`](htt
   - <module>:<passmanager constructor>
 ```
 
-The `<pip requirement specifier>` is a reference to your 
+The `<pip requirement specifier>` is a reference to your project. It will replace a place holder as `pip install <pip requirement specifier>`. It can be a package or a GitHub url. The lines `<module>:<passmanager constructor>` are an entry point to a passmanager constructor. It will be call as `from <module> import <passmanager constructor>`. The `<passmanager constructor>` is a function that receives a single parameter `PassManagerConfig` (see [API documentation](https://qiskit.org/documentation/apidoc/transpiler/preset_passmanagers/preset_passmanagers.html)).
