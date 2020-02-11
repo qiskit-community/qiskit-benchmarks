@@ -12,4 +12,4 @@ def generate_contributions_req(contributions_path, contributions_req):
 
 
 if __name__ == '__main__':
-  install_contributions(sys.argv[1], sys.argv[2])
+  generate_contributions_req(sys.argv[1], sys.argv[2])
