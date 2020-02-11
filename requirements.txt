@@ -1,0 +1,3 @@
+qiskit
+pyyaml
+importlib_metadata
