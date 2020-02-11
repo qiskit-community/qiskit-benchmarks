@@ -15,25 +15,8 @@
 import unittest
 from ddt import ddt
 
-from qiskit.transpiler.preset_passmanagers import level_0_pass_manager
-from qiskit.circuit import QuantumCircuit
-from qiskit.transpiler.pass_manager_config import PassManagerConfig
-from qiskit.transpiler import CouplingMap
 from cases import circuit1, circuit2, pm_config1, pm_config2
 from test import combine
-from json import dumps, JSONEncoder
-
-
-class ResultEncoder(JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, QuantumCircuit):
-            return obj.name
-        if isinstance(obj, PassManagerConfig):
-            return obj.__dict__
-        if isinstance(obj, CouplingMap):
-            return obj.get_edges()
-        return JSONEncoder.default(self, obj)
-
 
 results = {}
 

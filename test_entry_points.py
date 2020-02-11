@@ -5,16 +5,30 @@ import importlib
 from pprint import pprint
 from itertools import chain
 from dataclasses import dataclass, asdict
+from json import dumps, JSONEncoder
 
 import yaml
 import pkg_resources
 import importlib_metadata
 from importlib_metadata import distribution, files
+from qiskit import QuantumCircuit
+from qiskit.transpiler.pass_manager_config import PassManagerConfig
+from qiskit.transpiler import CouplingMap
 
 import benchmark
 
 
-def test_entry_points(contributions_path):
+class ResultEncoder(JSONEncoder):
+  def default(self, obj):
+    if isinstance(obj, QuantumCircuit):
+      return obj.name
+    if isinstance(obj, PassManagerConfig):
+      return obj.__dict__
+    if isinstance(obj, CouplingMap):
+      return obj.get_edges()
+    return JSONEncoder.default(self, obj)
+
+def test_entry_points(contributions_path, results_path):
   results = {}
 
   with open(contributions_path) as file:
@@ -35,7 +49,8 @@ def test_entry_points(contributions_path):
     except AttributeError:
       notify_cannot_find_entry_point(metadata.author_email, one_entry_point)
 
-  pprint(results)
+  with open(results_path, 'w+') as file:
+    file.write(dumps(results, cls=ResultEncoder))
 
 def get_metadata(module):
   module_path = module.__file__
@@ -74,4 +89,4 @@ def notify_cannot_find_entry_point(email, entry_point):
   print(f'send "{entry_point} not working" @ {email}')
 
 if __name__ == '__main__':
-  test_entry_points('contributions.yaml')
+  test_entry_points(sys.argv[1], sys.argv[2])

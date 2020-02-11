@@ -10,4 +10,4 @@ before_script:
   - pip install -r contributions.txt
 
 script:
-  - python test_entry_points.py contributions.yaml
+  - python test_entry_points.py contributions.yaml www/data.json
