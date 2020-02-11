@@ -24,7 +24,7 @@ class ResultEncoder(JSONEncoder):
     if isinstance(obj, QuantumCircuit):
       return obj.name
     if isinstance(obj, PassManagerConfig):
-      return obj.__dict__
+      return obj.name
     if isinstance(obj, CouplingMap):
       return obj.get_edges()
     return JSONEncoder.default(self, obj)

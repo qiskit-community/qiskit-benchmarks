@@ -34,16 +34,18 @@ class TestLevelZero(unittest.TestCase):
         results = cls.results
 
     @classmethod
-    def save_result(cls, test_name, **kwargs):
-        cls.results.append({test_name: kwargs})
+    def save_result(cls, test_name, circuit, config, result):
+        cls.results[f'{circuit.name}:{config.name}'] = result
 
-    @combine(circuit=[circuit1, circuit2], pm_config=[pm_config1, pm_config2])
+    # @combine(circuit=[circuit1, circuit2], pm_config=[pm_config1, pm_config2])
+    @combine(circuit=[circuit1], pm_config=[pm_config1])
     def test_depth(self, circuit, pm_config):
         ""
         depth = self.passmanager_factory(pm_config).run(circuit).depth()
         TestLevelZero.save_result('depth', circuit=circuit, config=pm_config, result=depth)
 
-    @combine(circuit=[circuit1, circuit2], pm_config=[pm_config1, pm_config2])
+    # @combine(circuit=[circuit1, circuit2], pm_config=[pm_config1, pm_config2])
+    @combine(circuit=[circuit1], pm_config=[pm_config1])
     def test_time(self, circuit, pm_config):
         ""
         calls = []
