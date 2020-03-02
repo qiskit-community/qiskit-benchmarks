@@ -1,6 +1,5 @@
 from qiskit import *
 from qiskit.transpiler.pass_manager_config import PassManagerConfig
-from qiskit.transpiler.preset_passmanagers import level_0_pass_manager
 from qiskit.transpiler import CouplingMap
 
 qr = QuantumRegister(3)
