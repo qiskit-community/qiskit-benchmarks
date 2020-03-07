@@ -6,4 +6,4 @@ install:
   - pip install --upgrade pip
 
 script:
-  - sh generate.sh _benchmark contributions.yaml www/data.json
+  - bash generate.sh _benchmark contributions.yaml www/data.json

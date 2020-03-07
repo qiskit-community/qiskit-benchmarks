@@ -3,7 +3,7 @@
 if [ "$#" -ne 3 ]; then
   echo "Invalid number of parameters."
   echo "Provide the folder where to run the benchmarks, the contribution index and the output file."
-  echo "I.e.: sh generate.sh _benchmark contributions.yaml www/data.json"
+  echo "I.e.: bash generate.sh _benchmark contributions.yaml www/data.json"
   exit 1
 fi
 
