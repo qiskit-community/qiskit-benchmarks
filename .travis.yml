@@ -4,11 +4,6 @@ python: 3.7
 
 install:
   - pip install --upgrade pip
-  - pip install -r requirements.txt
-
-before_script:
-  - python generate_contributions_req.py contributions.yaml contributions.txt
-  - pip install -r contributions.txt
 
 script:
-  - python test_entry_points.py contributions.yaml www/data.json
+  - sh generate.sh _benchmark contributions.yaml www/data.json

@@ -1,1 +1,48 @@
-{"qiskit-terra": {"name": "qiskit-terra", "description": "Software for developing quantum computing programs", "author": "Qiskit Development Team", "author_email": "qiskit@qiskit.org", "timestamp": "2020-03-07 09:46:05.289113", "results": [["qiskit.transpiler.preset_passmanagers.level0:level_0_pass_manager", {"circuit1:pm_config1": {"depth": 8, "time": 0.003576993942260742}}], ["qiskit.transpiler.preset_passmanagers.level1:level_1_pass_manager", {"circuit1:pm_config1": {"depth": 4, "time": 0.023448467254638672}}], ["qiskit.transpiler.preset_passmanagers.level2:level_2_pass_manager", {"circuit1:pm_config1": {"depth": 4, "time": 0.021483898162841797}}], ["qiskit.transpiler.preset_passmanagers.level3:level_3_pass_manager", {"circuit1:pm_config1": {"depth": 3, "time": 0.06269192695617676}}]]}}
+{
+  "qiskit-terra": {
+    "name": "qiskit-terra",
+    "description": "Software for developing quantum computing programs",
+    "author": "Qiskit Development Team",
+    "author_email": "qiskit@qiskit.org",
+    "timestamp": "2020-03-07 10:12:29.612186",
+    "version": "0.13.0",
+    "results": [
+      [
+        "qiskit.transpiler.preset_passmanagers.level0:level_0_pass_manager",
+        {
+          "circuit1:pm_config1": {
+            "depth": 8,
+            "time": 0.003680706024169922
+          }
+        }
+      ],
+      [
+        "qiskit.transpiler.preset_passmanagers.level1:level_1_pass_manager",
+        {
+          "circuit1:pm_config1": {
+            "depth": 4,
+            "time": 0.010385751724243164
+          }
+        }
+      ],
+      [
+        "qiskit.transpiler.preset_passmanagers.level2:level_2_pass_manager",
+        {
+          "circuit1:pm_config1": {
+            "depth": 4,
+            "time": 0.02730870246887207
+          }
+        }
+      ],
+      [
+        "qiskit.transpiler.preset_passmanagers.level3:level_3_pass_manager",
+        {
+          "circuit1:pm_config1": {
+            "depth": 3,
+            "time": 0.06703519821166992
+          }
+        }
+      ]
+    ]
+  }
+}

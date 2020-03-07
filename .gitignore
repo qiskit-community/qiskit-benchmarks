@@ -3,4 +3,4 @@ __pycache__
 .vscode
 contributions.txt
 .DS_Store
-.idea
+_benchmark
