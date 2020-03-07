@@ -4,7 +4,7 @@
     "description": "Software for developing quantum computing programs",
     "author": "Qiskit Development Team",
     "author_email": "qiskit@qiskit.org",
-    "timestamp": "2020-03-07 11:39:45.403711",
+    "timestamp": "2020-03-07 12:36:38.620557",
     "version": "0.13.0",
     "results": [
       [
@@ -12,7 +12,7 @@
         {
           "circuit1:pm_config1": {
             "depth": 8,
-            "time": 0.0030748844146728516
+            "time": 0.004370689392089844
           }
         }
       ],
@@ -21,7 +21,7 @@
         {
           "circuit1:pm_config1": {
             "depth": 4,
-            "time": 0.011906147003173828
+            "time": 0.013245344161987305
           }
         }
       ],
@@ -30,7 +30,7 @@
         {
           "circuit1:pm_config1": {
             "depth": 4,
-            "time": 0.023522377014160156
+            "time": 0.023134708404541016
           }
         }
       ],
@@ -39,7 +39,7 @@
         {
           "circuit1:pm_config1": {
             "depth": 3,
-            "time": 0.05664682388305664
+            "time": 0.07711458206176758
           }
         }
       ]

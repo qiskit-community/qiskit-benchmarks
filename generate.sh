@@ -30,14 +30,13 @@ create_virtual_env() {
   python3 -m venv .venv
   source .venv/bin/activate
 
-  echo "🐍 Check version:"
-  python3 --version
+  echo "🐍 Check version: $(python3 --version)"
   echo "📦 Update pip"
   python3 -m pip install --upgrade pip &> /dev/null
   echo "📦 Install common dependencies"
   python3 -m pip install -r requirements.txt &> /dev/null
 
-  echo "📸 Take snapshot of the base benchmark environment"
+  echo "📸 Take a snapshot of the base benchmark environment"
   git init
   git add . &> /dev/null
   git commit -m'Add base virtual environment' &> /dev/null
@@ -56,7 +55,7 @@ run_benchmark() {
   contributions=$(python3 extract_contributions.py "${CONTRIBUTIONS_INDEX}")
   for one_contribution in $contributions
   do
-    echo "Restore base benchmark environment"
+    echo "🧹  Restore base benchmark environment"
     git checkout . &> /dev/null
     git clean --force -d &> /dev/null
     echo "📦 Install contribution ${one_contribution}"
