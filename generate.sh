@@ -20,22 +20,24 @@ popd() {
 }
 
 create_virtual_env() {
-  echo "Creating virtual environment..."
+  echo "🌍 Creating virtual environment..."
   mkdir -p "$BENCHMARK_PATH"
 
-  echo "Setup benchmark environment"
+  echo "🛠  Setup benchmark environment"
   cp -r benchmarkenv/* "$BENCHMARK_PATH"
 
   pushd "$BENCHMARK_PATH"
   python3 -m venv .venv
   source .venv/bin/activate
 
-  echo "Check version:"
+  echo "🐍 Check version:"
   python3 --version
-  echo "Install common dependencies"
-  pip3 install -r requirements.txt &> /dev/null
+  echo "📦 Update pip"
+  python3 -m pip install --upgrade pip &> /dev/null
+  echo "📦 Install common dependencies"
+  python3 -m pip install -r requirements.txt &> /dev/null
 
-  echo "Take snapshot of the base benchmark environment"
+  echo "📸 Take snapshot of the base benchmark environment"
   git init
   git add . &> /dev/null
   git commit -m'Add base virtual environment' &> /dev/null
@@ -54,21 +56,24 @@ run_benchmark() {
   contributions=$(python3 extract_contributions.py "${CONTRIBUTIONS_INDEX}")
   for one_contribution in $contributions
   do
-    echo "Running benchmarks for ${one_contribution}..."
     echo "Restore base benchmark environment"
     git checkout . &> /dev/null
     git clean --force -d &> /dev/null
-    echo "Install contribution"
-    pip3 install "${one_contribution}" &> /dev/null
-    echo "Run benchmarks"
-    python3 test_entry_points.py "${CONTRIBUTIONS_INDEX}" "${one_contribution}" "${OUTPUT_PATH}"
+    echo "📦 Install contribution ${one_contribution}"
+    python3 -m pip install "${one_contribution}"
+    if [ $? == 0 ]; then
+      echo "⏱  Run benchmarks"
+      python3 test_entry_points.py "${CONTRIBUTIONS_INDEX}" "${one_contribution}" "${OUTPUT_PATH}"
+    else
+      echo "😱 Error installing contribution!"
+    fi
     echo
   done
 
   deactivate
   popd
 
-  echo "Done."
+  echo "👌 Done."
 }
 
 create_virtual_env
