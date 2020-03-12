@@ -46,10 +46,11 @@ def test_entry_points(contributions_path, contribution_key, results_path, overwr
     metadata = get_metadata(module)
     try:
       function = getattr(module, function_name)
-      if metadata.name not in contribution_results:
-        contribution_results[metadata.name] = { **asdict(metadata), 'results': [] }
+      if contribution_key not in contribution_results:
+        contribution_results[contribution_key] = { **asdict(metadata), 'results': [] }
 
-      contribution_results[metadata.name]['results'].append((one_entry_point, test(function)))
+      entry_point_results = test(function)
+      contribution_results[contribution_key]['results'].append((one_entry_point, entry_point_results))
     except AttributeError:
       notify_cannot_find_entry_point(metadata.author_email, one_entry_point)
 
